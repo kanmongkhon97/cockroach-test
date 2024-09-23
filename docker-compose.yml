@@ -12,7 +12,33 @@ services:
       - "8080:8080"
     volumes:
       - roach1:/cockroach/cockroach-data
-    command: start --advertise-addr=roach1:26357 --http-addr=roach0:8080 --listen-addr=roach0:26357 --sql-addr=roach0:26257 --insecure --join=roach1:26357,roach2:26357,roach3:26357
+    command: start --advertise-addr=roach1:26357 --http-addr=roach1:8080 --listen-addr=roach1:26357 --sql-addr=roach1:26257 --insecure --join=roach1:26357,roach2:26357,roach3:26357
+
+  roach2:
+    image: cockroachdb/cockroach:v24.2.1
+    container_name: roach2
+    hostname: roach2
+    networks:
+      roachnet:
+    ports:
+      - "26258:26257"
+      - "8081:8080"
+    volumes:
+      - roach2:/cockroach/cockroach-data
+    command: start --advertise-addr=roach2:26357 --http-addr=roach2:8080 --listen-addr=roach2:26357 --sql-addr=roach2:26258 --insecure --join=roach1:26357,roach2:26357,roach3:26357
+
+  roach3:
+    image: cockroachdb/cockroach:v24.2.1
+    container_name: roach3
+    hostname: roach3
+    networks:
+      roachnet:
+    ports:
+      - "26259:26257"
+      - "8082:8080"
+    volumes:
+      - roach3:/cockroach/cockroach-data
+    command: start --advertise-addr=roach3:26357 --http-addr=roach3:8080 --listen-addr=roach3:26357 --sql-addr=roach3:26259 --insecure --join=roach1:26357,roach2:26357,roach3:26357
 
 networks:
   roachnet:
@@ -20,3 +46,5 @@ networks:
 
 volumes:
   roach1:
+  roach2:
+  roach3:

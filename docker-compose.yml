@@ -11,7 +11,7 @@ services:
       - "8080:8080"
     volumes:
       - roach1:/cockroach/cockroach-data
-    command: start --insecure --advertise-addr=localhost --cache=.25 --max-sql-memory=.25
+    command: start --insecure --advertise-addr=10.35.141.253 --join=10.35.141.253,10.35.141.78 --cache=.25 --max-sql-memory=.25
 
 networks:
   roachnet:

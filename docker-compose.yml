@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  roach0:
+  roach:
     image: cockroachdb/cockroach:v24.2.1
     container_name: roach1
     hostname: roach1

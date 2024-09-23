@@ -5,37 +5,13 @@ services:
     image: cockroachdb/cockroach:v24.2.1
     container_name: roach1
     networks:
-      roachnet:
+      - roachnet
     ports:
       - "26257:26257"
       - "8080:8080"
     volumes:
       - roach1:/cockroach/cockroach-data
-    command: start --advertise-addr=localhost:26357 --http-addr=localhost:8080 --listen-addr=localhost:26357 --sql-addr=localhost:26257 --insecure --join=localhost:26357,localhost:26357,localhost:26357
-
-  roach2:
-    image: cockroachdb/cockroach:v24.2.1
-    container_name: roach2
-    networks:
-      roachnet:
-    ports:
-      - "26258:26257"
-      - "8081:8080"
-    volumes:
-      - roach2:/cockroach/cockroach-data
-    command: start --advertise-addr=localhost:26357 --http-addr=localhost:8080 --listen-addr=localhost:26357 --sql-addr=localhost:26258 --insecure --join=localhost:26357,localhost:26357,localhost:26357
-
-  roach3:
-    image: cockroachdb/cockroach:v24.2.1
-    container_name: roach3
-    networks:
-      roachnet:
-    ports:
-      - "26259:26257"
-      - "8082:8080"
-    volumes:
-      - roach3:/cockroach/cockroach-data
-    command: start --advertise-addr=localhost:26357 --http-addr=localhost:8080 --listen-addr=localhost:26357 --sql-addr=localhost:26259 --insecure --join=localhost:26357,localhost:26357,localhost:26357
+    command: start --insecure --advertise-addr=localhost --cache=.25 --max-sql-memory=.25
 
 networks:
   roachnet:
@@ -43,5 +19,3 @@ networks:
 
 volumes:
   roach1:
-  roach2:
-  roach3:

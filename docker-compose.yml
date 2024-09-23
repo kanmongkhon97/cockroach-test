@@ -3,20 +3,20 @@ version: '3.8'
 services:
   roach0:
     image: cockroachdb/cockroach:v24.2.1
-    container_name: roach0
-    hostname: roach0
+    container_name: roach1
+    hostname: roach1
     networks:
       roachnet:
     ports:
       - "26257:26257"
       - "8080:8080"
     volumes:
-      - roach0:/cockroach/cockroach-data
-    command: start --advertise-addr=roach0:26357 --http-addr=roach0:8080 --listen-addr=roach0:26357 --sql-addr=roach0:26257 --insecure --join=roach0:26357,roach1:26357
+      - roach1:/cockroach/cockroach-data
+    command: start --advertise-addr=roach1:26357 --http-addr=roach0:8080 --listen-addr=roach0:26357 --sql-addr=roach0:26257 --insecure --join=roach1:26357,roach2:26357,roach3:26357
 
 networks:
   roachnet:
     driver: bridge
 
 volumes:
-  roach0:
+  roach1:

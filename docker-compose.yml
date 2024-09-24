@@ -11,7 +11,7 @@ services:
       - "8080:8080"
     volumes:
       - roach1:/cockroach/cockroach-data
-    command: start --insecure --advertise-addr=10.35.141.249:26257 --join=http://k8s-cockroac-crdbcock-fccbe41da6-6fb61ddcf11aea15.elb.ap-southeast-1.amazonaws.com:26257 --cache=.25 --max-sql-memory=.25
+    command: start --insecure --advertise-addr=10.35.141.249:26257 --join=k8s-cockroac-crdbcock-fccbe41da6-6fb61ddcf11aea15.elb.ap-southeast-1.amazonaws.com:26257 --cache=.25 --max-sql-memory=.25
 
 networks:
   roachnet:
